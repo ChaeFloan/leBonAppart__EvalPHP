@@ -1,0 +1,54 @@
+<h1 class="text-center my-5">Détail de l'ensemble de nos annonces</h1>
+
+
+<?php for($i = 0 ; $i < $totalAdverts ; $i++): ?>
+    <div class="row">
+        <div class="col-sm-6 my-4">
+            <div class="card">
+                <div class="card-header" style="text-transform:uppercase">
+                <?= $allAdverts[$i]["type"] ?>
+                </div>
+                <div class="card-body">
+                <h5 class="card-title" style="text-transform:uppercase"><?= htmlspecialchars($allAdverts[$i]["title"]) ?></h5>
+                <p class="card-text"><?= nl2br(htmlspecialchars(substr($allAdverts[$i]["description"], 0, 200))) ?> [...] 
+                <a href="consultAdvert.php?id=<?= $allAdverts[$i]["id"] ?>">Lire la suite</a></p>
+            <!-- Si une réservation a déjà été faite sur cette annonce -->
+                <?php if(!empty($reservation[$i]["reservation_message"])): ?>
+                    <div class="d-grid gap-2">
+                    <a href="consultAdvert.php?id=<?= $allAdverts[$i]["id"] ?>" class="container color_reserv p-2 text-center">Bien déjà réservé</a>
+                    </div>
+                <?php endif ?>
+            <!-- Sinon on affiche le bouton afin d'en voir plus -->
+                <?php if(empty($reservation[$i]["reservation_message"])): ?>
+                <a href="consultAdvert.php?id=<?= $allAdverts[$i]["id"] ?>" class="btn btn-primary">Voir l'annonce</a>
+                <?php endif ?>
+                </div>
+            </div>
+        </div>
+        <?php $i++ ?>
+        <?php if($i < $totalAdverts): ?>
+            <div class="col-sm-6 my-4">
+            <div class="card">
+                <div class="card-header" style="text-transform:uppercase">
+                <?= $allAdverts[$i]["type"] ?>
+                </div>
+                <div class="card-body">
+                <h5 class="card-title" style="text-transform:uppercase"><?= htmlspecialchars($allAdverts[$i]["title"]) ?></h5>
+                <p class="card-text"><?= nl2br(htmlspecialchars(substr($allAdverts[$i]["description"], 0, 200))) ?> [...] 
+                <a href="consultAdvert.php?id=<?= $allAdverts[$i]["id"] ?>">Lire la suite</a></p>
+            <!-- Si une réservation a déjà été faite sur cette annonce -->
+                <?php if(!empty($reservation[$i]["reservation_message"])): ?>
+                    <div class="d-grid gap-2">
+                    <a href="consultAdvert.php?id=<?= $allAdverts[$i]["id"] ?>" class="container color_reserv p-2 text-center">Bien déjà réservé</a>
+                    </div>
+                <?php endif ?>
+            <!-- Sinon on affiche le bouton afin d'en voir plus -->
+                <?php if(empty($reservation[$i]["reservation_message"])): ?>
+                <a href="consultAdvert.php?id=<?= $allAdverts[$i]["id"] ?>" class="btn btn-primary">Voir l'annonce</a>
+                <?php endif ?>
+                </div>
+            </div>
+        </div>
+        <?php endif ?>
+    </div>
+<?php endfor ?>

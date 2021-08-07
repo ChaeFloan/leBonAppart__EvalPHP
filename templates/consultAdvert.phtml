@@ -1,0 +1,55 @@
+<h1 class="my-5">Détail de l'annonce : </h1>
+<h2 class="text-center" style="text-transform:uppercase"><?= $detailAdvert[0]["title"] ?></h2>
+
+<!-- Bouton d'accès PAGE PRECEDENTE / PAGE SUIVANTE -->
+<div class="container d-flex justify-content-between">
+    <a href="consultAdvert.php?id=<?= $precedentIdentifiant ?>" class="btn btn-primary <?php if($identifiant <= 1): ?>disabled<?php endif ?>">Annonce précédente</a>
+    <a href="consultAdvert.php?id=<?= $suivantIdentifiant ?>" class="btn btn-primary <?php if($identifiant >= $totalAdverts): ?>disabled<?php endif ?>">Annonce suivante</a>
+</div>
+
+<!-- Affichage de l'annonce -->
+<div class="container my-4">
+    <div class="card mt-4">
+        <img src="./autre/house.jpg" class="card-img-top" alt="Illustration" style="object-fit: fill; height: 300px;">
+        <div class="card-header" style="text-transform:uppercase">
+        <?= $detailAdvert[0]["type"] ?>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" style="text-transform:uppercase"><?= htmlspecialchars($detailAdvert[0]["title"]) ?></h5>
+            <p class="card-text"><?= nl2br(htmlspecialchars($detailAdvert[0]["description"])) ?></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <div><?= htmlspecialchars($detailAdvert[0]["postal_code"]) ?> <?= htmlspecialchars($detailAdvert[0]["city"]) ?></div>
+            <div><?= htmlspecialchars($detailAdvert[0]["price"]) ?> €</div>
+        </div>
+    </div>
+</div>
+
+<!-- Si l'espace <reservation_message> de la base de donnée est vide (pas de message enregistré), on affiche le formulaire permettant d'entrer un message -->
+<?php if(empty($reservation[0]["reservation_message"])): ?>
+    <div class="container my-5 pb-5">
+        <p id="message">Si vous êtes intéressé(e) par ce bien, laissez-nous un message afin de le réserver :</p>
+        <form method="post">
+            <textarea type="text" class="form-control" rows="5" id="reservation_message" name="reservation_message" required></textarea>
+            <button class="btn btn-primary my-4">Je réserve !</button>
+        </form>
+    </div>
+<?php endif ?>
+
+<!--  Si l'espace <reservation_message> de la base de donnée n'est pas vide, alors on affiche le message enregistré à la place du formulaire -->
+<?php if(!empty($reservation[0]["reservation_message"])): ?>
+<div class="container mb-5">
+    <p class="disabled">Quelqu'un est déjà positionné sur cette offre</p>
+    <div class="bg-success p-4 d-flex justify-content-between">
+        <p>Message du potentiel acquéreur :</p>
+        <form 
+        action="suppression_reservation.php?id=<?= $detailAdvert[0]["id"] ?>" 
+        method="post">
+            <button class="btn btn-danger">Supprimer la réservation</button>
+        </form>
+    </div>
+    <div class="card-header mb-5 mt-4">
+        <p class="text-center"><?= htmlspecialchars($reservation[0]["reservation_message"]) ?></p>
+    </div>
+</div>
+<?php endif ?>

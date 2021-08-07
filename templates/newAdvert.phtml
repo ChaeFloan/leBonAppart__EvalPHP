@@ -1,0 +1,41 @@
+<h1 class="text-center my-5">Ajouter une annonce</h1>
+<p class="text-center text-secondary">Il est nécessaire de renseigner tous les champs.</p>
+
+
+<form method="post" action="newAdvert.php" class="mb-5">
+    <!-- TITRE ANNONCE -->
+  <div class="mb-3">
+    <label for="title" class="form-label">Titre de votre annonce</label>
+    <input type="text" class="form-control" id="title" name="title" required>
+  </div>
+  <!-- DESCRIPTION -->
+  <div class="mb-3">
+    <label for="description" class="form-label">Description de votre annonce</label>
+    <textarea type="text" class="form-control" rows="5" id="description" name="description" required></textarea>
+  </div>
+  <!-- CODE POSTAL -->
+  <div class="mb-3">
+    <label for="postal_code" class="form-label">Votre code postal</label>
+    <input type="text" class="form-control" id="postal_code" name="postal_code" required>
+  </div>
+  <!-- VILLE -->
+  <div class="mb-3">
+    <label for="city" class="form-label">Votre ville</label>
+    <input type="text" class="form-control" id="city" name="city" required>
+  </div>
+  <!-- TYPE -->
+  <div class="mb-3">
+    <label for="type" class="form-label">Type d'annonce</label><br/>
+    <input type="radio" id="location" name="type" value="location">
+    <label for="location">Location</label><br>
+    <input type="radio" id="vente" name="type" value="vente">
+    <label for="vente">Vente</label><br>
+  </div>
+  <!-- PRIX -->
+  <div class="mb-3">
+    <label for="price" class="form-label">Proposé au prix de (si location, indiquer le prix du loyer mensuel)</label>
+    <input type="text" class="form-control" id="price" name="price" required>
+  </div>
+
+  <button class="btn btn-primary">Enregistrer l'annonce</button>
+</form>
